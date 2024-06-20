@@ -1,0 +1,169 @@
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  font-family: Sofia, sans-serif;
+  background-color: #175eba
+}
+
+.topnav {
+  overflow: hidden;
+  background-color: #333;
+  margin-top: 0px;
+  display: flex;
+  justify-content: space-around;
+  margin-left: 200px;
+}
+
+.topnav a {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #f2f2f2;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+.topnav a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+.topnav a.active {
+  background-color: #04AA6D;
+  color: black;
+}
+
+.sidebar {
+  height: 100%;
+  width: 200px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: #333;
+}
+
+.sidebar a {
+  padding: 10px;
+  text-decoration: none;
+  font-size: 18px;
+  color: white;
+  display: block;
+}
+
+.sidebar a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+main {
+  margin-left: 200px;
+  padding: 0px;
+  background-color: #bababa;
+}
+
+footer {
+  background-color: #333;
+  color: white;
+  text-align: center;
+  padding: 10px;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+
+button {
+  background-color: #11a1df;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  cursor: pointer;
+  font-size: 10px;
+  margin-bottom: 50px;
+  transition: background-color 0.3s ease;
+  border-radius: 12px;
+}
+
+button:hover {
+  background-color: #08bbe7;
+  ;
+}
+
+h1 {
+  color: aqua;
+  font-family: Sofia, sans-serif;
+  font-size: 50px;
+}
+
+p {
+  color: #0e43e1;
+  font-size: 20px;
+}
+
+#saturs {
+  background-color: #f32020;
+  padding: 20px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+#saturs p {
+  color: yellow;
+  font-size: 30px;
+}
+
+#saturs img {
+  display: block;
+  border-radius: 8px;
+  margin: 0 auto;
+}
+
+#tabula {
+  background-color: #f32091;
+  padding: 20px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+#canva {
+  background-color: #20f34a;
+  padding: 20px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+#tabula table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: white;
+  border: 1px solid #11e46c;
+}
+
+#tabula td {
+  padding: 10px;
+  text-align: center;
+}
+
+#tabula tr:nth-child(1) {
+  background-color: #d91717;
+}
+
+#tabula tr:nth-child(2) {
+  background-color: #d91717;
+}
+
+#lapas {
+  width: 100%;
+  height: 100%;
+}
+
+#lapas_saturs {
+  width: 100%;
+  height: 100%;
+}

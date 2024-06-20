@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Mana mājas lapa</title>
+  <link href="style.css" rel="stylesheet" type="text/css" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sofia">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+</head>
+
+<body>
+  <header> <!-- Šis ir mans virsraksts -->
+    <nav class="topnav">
+      <a href="index.html" class="active">Sākums</a>
+      <a href="par_mums.html" onclick="atjaunotIetvaru(this); return false;">Par mums</a>
+      <a href="kontakti.html" onclick="atjaunotIetvaru(this); return false;">Kontakti</a>
+    </nav>
+
+  </header>
+  <aside class="sidebar">
+    <a href="#saturs">Saturs</a>
+    <a href="#tabula">Tabula</a>
+  </aside>
+  <main id="lapas_saturs">
+  <h1>Sveiki, pasaule!</h1>
+  <p>Tests vai iet krāsa</p>
+  <section id="saturs">
+    <p>Šis ir mans pirmais HTML!</p>
+    <img src="bilde.jpg" class="img-thumbnail" width="200px">
+    <br>
+    <audio controls>
+      <source src="audio.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+    </audio>
+    <ul type="square">
+      <li>Pirmais</li>
+      <li>Otrais</li>
+      <li>Trešais</li>
+    </ul>
+    <a href="par_mums.html">Par mums</a>
+    <a href="kontakti.html">Sazināties</a>
+  </section>
+  <section id="tabula">
+  <table border="1">
+    <tr>
+      <td>1.rinda 1.kolonna</td>
+      <td>1.rinda 2.kolonna</td>
+    </tr>
+    <tr>
+      <td>2. rinda 1. kolonna</td>
+      <td>2. rinda 2. kolonna</td>
+    </tr>
+    <tr>
+      <td>3. rinda 1. kolonna</td>
+      <td>3. rinda 2. kolonna</td>
+    </tr>
+    <tr>
+      <td>4. rinda 1. kolonna</td>
+      <td>4. rinda 2. kolonna</td>
+    </tr>
+  </table>
+  </section>
+  <section id="saturs">
+    <label for="vards">Ievadi savu vārdu</label>
+    <input type="text" id="vards" name="vards">
+    <label for="a">Ievadi a vērtību</label>
+    <input type="number" id="a">
+    <label for="b">Ievadi b vērtību</label>
+    <input type="number" id="b">
+    <button type="button" class="btn btn-danger" onclick="aprekins()">Aprēķināt</button>
+    <p id="rezultats">Šeit būs rezultāts pēc aprēķina</p>
+  </section>
+  <section id="canva">
+    <canvas id="zimejums" width="500" height="400"></canvas><br>
+
+  </section>
+    <button onclick="taisnsturis()">Parādīt taisnstūri</button>
+    <button onclick="aplis()">Parādīt apli</button>
+    <button onclick="linija()">Parādīt līniju</button>
+    <button onclick="teksts()">Parādīt tekstu</button>
+  </main>
+  <footer>&copy; Mana firma</footer>
+  <script src="script.js"></script>
+</body>
+
+</html>
