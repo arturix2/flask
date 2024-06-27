@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="lv">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pamati un sintakse</title>
+    <link href="{{ url_for('static', filename='style.css') }}" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+    <nav>
+      <ul>
+        <li><a href="/sveiciens">Sveiciens Pasaule</a></li>
+        <li><a href="/mainigie">Mainigie</a></li>
+        <li><a href="/datu_tipi">Datu_tipi</a></li>
+        <li><a href="/operatori">Operatori</a></li>
+        <li><a href="/kontroles_strukturas">Konktroles struktūras</a></li>
+        <li><a href="/funkcijas">Funkcijas</a></li>
+        <li><a href="/failu_apstrade">Failu apstrāde</a></li>
+        <li><a href="/moduli">Matemātiksās funkcijas</a></li>
+      </ul>
+    </nav>
+    <div>
+      {% block content %}{% endblock %}
+    </div>
+  </body>
+</html>
