@@ -1,4 +1,6 @@
 from flask import Flask, render_template, request
+import sqlite3
+from werkzeug.security import generate_password_hash, check_password_hash
 
 app = Flask(__name__)
 
@@ -139,6 +141,51 @@ def aptauja():
 @app.route('/pieteikties')
 def pieteikties():
     return render_template('pieteikties.html')
+
+@app.route('/iesniegt', methods=['POST'])
+def iesniegt():
+    vards = request.form['vards']
+    dzimums = request.form['dzimums']
+    hobiji = request.form.getlist('hobji')
+    hobiji_str = ', '.join(hobiji)
+    conn = sqlite3.connect('datubaze.db')
+    cursor = conn.cursor()
+    cursor.execute('INSERT INTO lietotaji (vards, dzimums, hobiji) VALUES (?, ?, ?)', 
+                   (vards, dzimums, hobiji_str))
+    conn.commit()
+    conn.close()
+    
+    return render_template('paldies.html')
+
+def init_db():
+    conn = sqlite3.connect('datubaze.db')
+    cursor = conn.cursor()
+
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS lietotaji (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            vards TEXT NOT NULL,
+            dzimums TEXT NOT NULL,
+            hobiji TEXT
+        )
+    ''')
+
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS administratori (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            lietotajvards TEXT NOT NULL,
+            parole TEXT NOT NULL
+        )
+    ''')
+
+    cursor.execute('SELECT * FROM administratori WHERE lietotajvards = ?', ('admin',))
+    if not cursor.fetchone():
+        cursor.execute('INSERT INTO administratori (lietotajvards, parole) VALUES (?, ?)', ('admin', generate_password_hash('admin')))
+
+    conn.commit()
+    conn.close()
+
+init_db()
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
