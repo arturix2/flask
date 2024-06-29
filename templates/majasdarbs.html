@@ -1,0 +1,12 @@
+{% extends "pamati_sintakse.html" %}
+
+{% block content %}
+<h1>Mājas darbs</h1>
+<p>Nepieciešams ievadīt divus veselus skaitļus, lai pārbaudītu vai tie ir vienādi, pirmais lielāks par otro, vai otrais lielāks par pirmo.</p>
+<form action="/majasdarbs2" method="post">
+  <input type="number" name="a" placeholder="Ievadiet pirmo skaitli" required>
+  <input type="number" name="b" placeholder="Ievadiet otro skaitli" required>
+  <input type="submit">
+</form>
+{{ rez }}
+{% endblock %}

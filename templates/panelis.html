@@ -1,0 +1,27 @@
+{% extends "pamati_sintakse.html" %}
+
+{% block content %}
+<h1>Admin panelis</h1>
+<a href="/izlogoties">Izlogoties</a>
+<h2>Lietotāju dati</h2>
+<table border="1">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Vārds</th>
+      <th>Dzimums</th>
+      <th>Hobiji</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for lietotajs in lietotaji %}
+    <tr>
+      <td>{{ lietotajs.id }}</td>
+      <td>{{ lietotajs.vards }}</td>
+      <td>{{ lietotajs.dzimums }}</td>
+      <td>{{ lietotajs.hobiji }}</td>
+    </tr>  
+    {% edfor %}
+  </tbody>
+  
+{% endblock %}

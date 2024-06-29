@@ -77,9 +77,12 @@ def kontroles_strukturas():
 def funkcijas():
     def sveiciens(vards="Jānis"):
         return f"Sveiki! {vards}!"
-    sveiciens = sveiciens()
+    sveiciens1 = sveiciens()
+    sveiciens2 = sveiciens("Irina")
+    sveiciens3 = sveiciens1 + sveiciens2
 
-    return render_template('funkcijas.html', sveiciens=sveiciens)
+    return render_template('funkcijas.html', sveiciens1=sveiciens1, 
+                           sveiciens2=sveiciens2, sveiciens3=sveiciens3)
 
 @app.route('/failu_apstrade')
 def failu_apstrade():
@@ -94,10 +97,48 @@ def moduli():
     sqrt_rezultats = math.sqrt(16)
     return render_template('moduli.html', sqrt_rezultats=sqrt_rezultats)
 
+@app.route('/oop')
+def oop():
+    class Persona:
+        def __init__(self, vards, vecums):
+            self.vards = vards
+            self.vecums = vecums
+
+        def sveiciens(self):
+            return f"Sveiki, mani sauc {self.vards} un man ir {self.vecums} gadi."
+    persona1 = Persona("Jānis", 25)
+    sveiciens = persona1.sveiciens()
+
+    return render_template('oop.html', sveiciens=sveiciens)
+
 @app.route('/aiziet', methods=['POST'])
 def aiziet():
     lietotajs = request.form['lietotajvards']
     return f"Paldies, {lietotajs}! Jūsu pieteikums ir saņemts"
+
+@app.route('/majasdarbs')
+def majasdarbs():
+    return render_template('majasdarbs.html')
+
+@app.route('/majasdarbs2', methods=['POST'])
+def majasdarbs2():
+    a = int(request.form['a'])
+    b = int(request.form['b'])
+    if a == b:
+        rez = "Abi skaitļi ir vienādi"
+    elif a > b:
+        rez = "Pirmais skaitlis ir lielāks"
+    else:
+        rez = "Otrais skaitlis ir lielāks"
+    return render_template('majasdarbs.html', rez=rez)
+
+@app.route('/aptauja')
+def aptauja():
+    return render_template('aptauja.html')
+
+@app.route('/pieteikties')
+def pieteikties():
+    return render_template('pieteikties.html')
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
