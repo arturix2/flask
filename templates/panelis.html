@@ -16,12 +16,12 @@
   <tbody>
     {% for lietotajs in lietotaji %}
     <tr>
-      <td>{{ lietotajs.id }}</td>
-      <td>{{ lietotajs.vards }}</td>
-      <td>{{ lietotajs.dzimums }}</td>
-      <td>{{ lietotajs.hobiji }}</td>
+      <td>{{ lietotajs[0] }}</td>
+      <td>{{ lietotajs[1] }}</td>
+      <td>{{ lietotajs[2] }}</td>
+      <td>{{ lietotajs[3] }}</td>
     </tr>  
-    {% edfor %}
+    {% endfor %}
   </tbody>
   
 {% endblock %}

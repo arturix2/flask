@@ -1,0 +1,30 @@
+{% extends "pamati_sintakse.html" %}
+
+{% block content %}
+<h1>CSV datu ievade</h1>
+<form action="/pievienot" method="POST">
+  <label for="vards">Vārds:</label>
+  <input type="text" id="vards" name="vards" required>
+  <label for="vecums">Vecums:</label>
+  <input type="number" id="vecums" name="vecums" required>
+  <label for="pilseta">Pilsēta:</label>
+  <input type="text" id="pilseta" name="pilseta" required>
+  <br><br>
+  <input type="submit" value="Pievienot ierakstu">
+</form>
+<h2>Esošie dati CSV failā</h2>
+<table border="1">
+  <tr>
+    <th>Vārds</th>
+    <th>Vecums</th>
+    <th>Pilsēta</th>
+  </tr>
+  {% for rinda in dati %}
+  <tr>
+    <td>{{ rinda[0] }}</td>
+    <td>{{ rinda[1] }}</td>
+    <td>{{ rinda[2] }}</td>
+  </tr>
+  {% endfor %}
+</table>
+{% endblock %}

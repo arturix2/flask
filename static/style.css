@@ -8,6 +8,10 @@ body {
   background-color: #175eba;
 }
 
+.majasdarbs {
+  color: red;
+}
+
 .topnav {
   overflow: hidden;
   background-color: #333;
@@ -170,4 +174,64 @@ p {
   height: 100%;
   width: calc(100% - 200px);
   margin-top: 25px;
+}
+
+form {
+  background-color: #fff;
+  border-radius: 8px;
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+label {
+  display: block;
+  margin-bottom: 8px;
+  color: #333;
+}
+
+.input-group {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.input-group > div {
+  flex: 1;
+  min-width: 200px;
+  margin-bottom: 20px;
+}
+
+.input-group > div:first-child {
+  margin-right: 20px;
+}
+
+input[type="text"] {
+  width: calc(100% - 24px);
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+input[type="radio"],
+input[type="checkbox"] {
+  margin-right: 10px;
+}
+
+input[type="submit"] {
+  display: block;
+  width: 100%;
+  padding: 12px 0;
+  background-color: #28a745;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+input[type="submit"]:hover {
+  background-color: #218838;
 }

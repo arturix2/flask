@@ -1,8 +1,13 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, session, url_for, flash, redirect, jsonify
 import sqlite3
 from werkzeug.security import generate_password_hash, check_password_hash
+import csv
+import os
+import requests
 
 app = Flask(__name__)
+
+app.secret_key = "manasesija"
 
 @app.route('/')
 def index():
@@ -134,13 +139,66 @@ def majasdarbs2():
         rez = "Otrais skaitlis ir lielāks"
     return render_template('majasdarbs.html', rez=rez)
 
+@app.route('/pievienot', methods=['POST'])
+def pievienot():
+    vards = request.form['vards']
+    vecums = request.form['vecums']
+    pilseta = request.form['pilseta']
+    if vards and vecums and pilseta:
+        ierakstit_csv('dati.csv', [vards, vecums, pilseta])
+    return redirect(url_for('csv2'))
+
+def ierakstit_csv(faila_nosaukums, dati):
+    with open(faila_nosaukums, mode='a', newline='', encoding="UTF-8-sig") as fails:
+        csv_rakstitajs = csv.writer(fails)
+        csv_rakstitajs.writerow(dati)
+
+def nolasit_csv(faila_nosaukums):
+    if not os.path.exists(faila_nosaukums):
+        return []
+    with open(faila_nosaukums, mode='r', newline='') as fails:
+        csv_lasitajs = csv.reader(fails)
+        return list(csv_lasitajs)
+
+@app.route('/csv2')
+def csv2():
+    dati = nolasit_csv('dati.csv')
+    return render_template('csv.html', dati=dati)
+
 @app.route('/aptauja')
 def aptauja():
     return render_template('aptauja.html')
 
-@app.route('/pieteikties')
+@app.route('/pieteikties', methods=['GET','POST'])
 def pieteikties():
+    if request.method == 'POST':
+        lietotajvards = request.form['lietotajvards']
+        parole = request.form['parole']
+
+        conn = sqlite3.connect('datubaze.db')
+        cursor = conn.cursor()
+        cursor.execute('SELECT * FROM administratori WHERE lietotajvards = ?', 
+                       (lietotajvards,))
+        admin = cursor.fetchone()
+        conn.close()
+
+        if admin and check_password_hash(admin[2], parole):
+            session['lietotajvards'] = lietotajvards
+            return redirect(url_for('panelis'))
+        else:
+            flash('Nepareizs lietotājvārds vai parole!!!!')
     return render_template('pieteikties.html')
+
+@app.route('/panelis')
+def panelis():
+    if 'lietotajvards' not in session:
+        return redirect(url_for('pieteikties'))
+    conn = sqlite3.connect('datubaze.db')
+    cursor = conn.cursor()
+    cursor.execute('SELECT * FROM lietotaji')
+    lietotaji = cursor.fetchall()
+    conn.close()
+    return render_template('panelis.html', lietotaji=lietotaji)
 
 @app.route('/iesniegt', methods=['POST'])
 def iesniegt():
@@ -156,6 +214,11 @@ def iesniegt():
     conn.close()
     
     return render_template('paldies.html')
+
+@app.route('/izlogoties')
+def izlogoties():
+    session.pop('lietotajvards', None)
+    return redirect(url_for('pieteikties'))
 
 def init_db():
     conn = sqlite3.connect('datubaze.db')
@@ -186,6 +249,13 @@ def init_db():
     conn.close()
 
 init_db()
+
+@app.route('/joks', methods=['GET'])
+def joks():
+    saite = 'https://api.chucknorris.io/jokes/random'
+    atbilde = requests.get(saite)
+    dati = atbilde.json()
+    return render_template('joks.html', joks=dati['value'], saite=dati['url'])
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
